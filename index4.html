@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Portfolio</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+
+<body>
+  <header>
+    <a href="#" class="logo">Hi There!</a>
+
+    <i class='bx bx-menu' id="menu-icon"></i>
+
+    <nav class="navbar">
+      <a href="#" class="active">Home</a>
+      <a href="#">About Me</a>
+      <a href="#">Achivement</a>
+      <a href="#">Contact Me</a>
+    </nav>
+
+  </header>
+
+  <section class="home" id="home">
+    <div class="home-text">
+      <h3 class="first-home-text">Hi Folks, It's Me</h3>
+      <h1>Anuraj Das</h1>
+      
+      <h3 class="third-home-text">
+        <a href="" class="typewrite" data-period="2000" data-type='[ "And I am a Student", "Who is learning FUll Stack!" ]'>
+          <span class="wrap"></span>
+        </a>
+      </h3>
+
+      <a href="https://drive.google.com/file/d/1hvG9HRrMqAHGXGaiRi83jZHHzu6SoLjc/view?usp=sharing" class="btn" target="_blank">Download My Resume</a>
+    </div>
+
+
+
+    <div class="home-img">
+      <img src="Ride.jpg" alt="Home-Img" class="a">
+      
+    </div>
+
+  </section>
+
+  <script src="script.js">
+  </script>
+  <script>
+    var TxtType = function(el, toRotate, period) {
+  this.toRotate = toRotate;
+  this.el = el;
+  this.loopNum = 0;
+  this.period = parseInt(period, 10) || 2000;
+  this.txt = '';
+  this.tick();
+  this.isDeleting = false;
+};
+
+TxtType.prototype.tick = function() {
+  var i = this.loopNum % this.toRotate.length;
+  var fullTxt = this.toRotate[i];
+
+  if (this.isDeleting) {
+    this.txt = fullTxt.substring(0, this.txt.length - 1);
+  } else {
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+  }
+
+  this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+  var that = this;
+  var delta = 200 - Math.random() * 100;
+
+  if (this.isDeleting) { delta /= 2; }
+
+  if (!this.isDeleting && this.txt === fullTxt) {
+    delta = this.period;
+    this.isDeleting = true;
+  } else if (this.isDeleting && this.txt === '') {
+    this.isDeleting = false;
+    this.loopNum++;
+    delta = 500;
+  }
+
+  setTimeout(function() {
+    that.tick();
+  }, delta);
+};
+
+window.onload = function() {
+  var elements = document.getElementsByClassName('typewrite');
+  for (var i = 0; i < elements.length; i++) {
+    var toRotate = elements[i].getAttribute('data-type');
+    var period = elements[i].getAttribute('data-period');
+    if (toRotate) {
+      new TxtType(elements[i], JSON.parse(toRotate), period);
+    }
+  }
+  
+  var css = document.createElement("style");
+  css.type = "text/css";
+  css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+  document.body.appendChild(css);
+};
+
+  </script>
+
+ <style>
+    html {
+  height: 100%;
+  width: 100%;
+}
+
+*{
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border:none;
+  outline: none;
+  scroll-behavior: smooth;
+  font-family: 'poppins', sans-serif;
+}
+
+body{
+  
+  background:#1f242d;
+}
+
+
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left:0;
+  width: 100%;
+  padding: .5rem 4%;
+  background:transparent ;
+  z-index: 100;
+}
+
+.logo{
+  font-size: 2.5rem;
+  color: white;
+  font-weight: 600;
+  cursor: default;
+}
+
+
+.navbar{
+  margin-right: -70px;
+}
+
+
+.navbar a{
+  font-size: 1rem;
+  color: white;
+  margin-right: 6rem ;
+  cursor: pointer;
+}
+
+.navbar a:hover,
+.navbar a.active{
+  color: #01f4d3;
+}
+
+#menu-icon{
+  font-size:2.5rem;
+  color: white;
+  display: none;
+}
+
+section{
+  min-height: 100vh;
+  padding: 10rem 9% 2rem;
+}
+
+.home{
+  display:flex;
+  justify-content:space-between;
+  align-items: center;
+}
+
+.home-img img{
+  width: 30vw;
+   animation: float 3s ease-out infinite;
+  box-shadow: 0 0 15rem #01f4d3;
+  border-radius: 50%;
+}
+@keyframes float{
+  50%{
+    transform: translateY(85px);
+  }
+}
+
+.home-text h3{
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+}
+
+.home-text h1{
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2rem;
+  color: #01f4d3;
+}
+
+.first-home-text{
+  margin-bottom: 2rem;
+}
+
+.third-home-text{
+  margin-top: 2rem;
+}
+
+.btn{
+  background: #01f4d3;
+  display: inline-block;
+  padding: 1rem 2.8rem;
+  border-radius: 4rem;
+  box-shadow: 0 0 1rem #01f4d3;
+  color: white;
+  margin-top: 1.5vw;
+  font-weight: 600;
+  transition: .5s ease;
+}
+
+.btn:hover{
+  box-shadow: none;
+}
+
+
+
+.typewrite{
+  color: white;
+} 
+ </style>
+  
+</body>
+
+</html>
